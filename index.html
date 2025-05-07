@@ -28,7 +28,7 @@
                 <a class="nav-link" style="--bs-hover-color-rgb: 255, 223, 0;" href="popular.html">Popular</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="--bs-hover-color-rgb: 255, 223, 0;" href="canvas.html">Canvas</a>
+                <a class="nav-link" style="--bs-hover-color-rgb: 255, 223, 0;" href="canvas.html"></a>
               </li>
             </ul>
             <form class="d-flex" role="search">
@@ -39,5 +39,27 @@
     </div>
 </nav>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script>
+    const API_KEY = '837395a456c7121a660054dfbd25c3b739f569bb';
+    const baseURL = 'https://comicvine.gamespot.com/api';
+
+    async function fetchCharacter(query) {
+      const url = `${baseURL}/search/?api_key=${API_KEY}&format=json&query=${query}&resources=character`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'User-Agent': 'ComicApp/1.0'
+        }
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      document.getElementById("results").innerText = JSON.stringify(data.results, null, 2);
+    }
+
+    fetchCharacter("batman");
+    </script>
   </body>
 </html>
